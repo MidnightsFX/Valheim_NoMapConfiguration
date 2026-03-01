@@ -25,6 +25,7 @@ namespace NoMapTools.modules {
                 if (player.GetComponent<NoMapLocationTracker>() == null) {
                     ZoneSystem.instance.FindClosestLocation(__instance.m_locations.First().m_locationName, player.transform.position, out var closest);
                     NoMapLocationTracker nmtracker = player.gameObject.AddComponent<NoMapLocationTracker>();
+                    Logger.LogDebug($"Tracking {__instance.m_locations.First().m_locationName} at {closest}");
                     nmtracker.Setup(ValConfig.VegvisirTrackerDuration.Value, closest.m_position);
                     player.Message(MessageHud.MessageType.Center, $"You are briefly tracking {__instance.m_locations.First().m_pinName}");
                 }
@@ -58,15 +59,16 @@ namespace NoMapTools.modules {
                 if (setup == false) { return; }
 
                 if (nextParticleSpawnTimer < Time.realtimeSinceStartup) {
-                    if (sfxfinder != null) { GameObject.Instantiate(sfxfinder); }
+                    Vector3 currentPositionStart = new Vector3() { x = Player.m_localPlayer.transform.position.x, z = Player.m_localPlayer.transform.position.z, y = Player.m_localPlayer.transform.position.y + 1f };
+                    if (sfxfinder != null) {
+                        GameObject.Instantiate(sfxfinder, currentPositionStart, Quaternion.identity);
+                    }
 
-                    GameObject spawnedEffect = GameObject.Instantiate(vfxfinder);
-                    spawnedEffect.transform.position = new Vector3() { x = this.transform.position.x, z = this.transform.position.z, y = this.transform.position.y + 1f };
+                    GameObject spawnedEffect = GameObject.Instantiate(vfxfinder, currentPositionStart, Quaternion.identity);
                     Vector3 direction = (targetPosition - spawnedEffect.transform.position).normalized;
                     Vector3 force = direction * ValConfig.VegvisirTrackerSpeed.Value;
                     spawnedEffect.GetComponent<Rigidbody>().AddForce(force, ForceMode.VelocityChange);
                     // Todo: make configurable the interval
-                    //particleEffects.Add(new TrackedParticle() { go = spawnedEffect, vel = new Vector3() });
                     nextParticleSpawnTimer = Time.realtimeSinceStartup + 5f;
                 }
 

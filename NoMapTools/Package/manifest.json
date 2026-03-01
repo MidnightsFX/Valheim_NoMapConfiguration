@@ -1,8 +1,8 @@
 ﻿{
   "name": "NoMapTools",
-  "description": "",
-  "version_number": "0.0.1",
-  "website_url": "",
+  "description": "Tools to make no-map more functional.",
+  "version_number": "0.0.3",
+  "website_url": "https://discord.gg/Dmr9PQTy9m",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2333",
     "ValheimModding-Jotunn-2.26.1"
