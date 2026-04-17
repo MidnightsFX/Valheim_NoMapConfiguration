@@ -19,7 +19,7 @@ namespace NoMapTools
     {
         public const string PluginGUID = "MidnightsFX.NoMapTools";
         public const string PluginName = "NoMapTools";
-        public const string PluginVersion = "0.0.3";
+        public const string PluginVersion = "0.0.5";
 
         public static AssetBundle EmbeddedResourceBundle;
 

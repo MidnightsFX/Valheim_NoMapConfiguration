@@ -9,9 +9,11 @@ namespace NoMapTools.common {
 
         public static ConfigEntry<float> CartographyTablePieceRequirementDistance;
         public static ConfigEntry<int> CartographyTableRequiredPieces;
+        public static ConfigEntry<bool> VegvisirGivesMapIcon;
         public static ConfigEntry<int> VegvisirTrackerDuration;
         public static ConfigEntry<float> VegvisirTrackerSpeed;
         public static ConfigEntry<float> VegvisirTrackerPingFrequency;
+        public static ConfigEntry<float> VegvisirNetworkWaitDuration;
 
         public ValConfig(ConfigFile cf) {
             // ensure all the config values are created
@@ -32,9 +34,11 @@ namespace NoMapTools.common {
 
             CartographyTablePieceRequirementDistance = BindServerConfig("CartographyTable", "CartographyTablePieceRequirementDistance", 100f, "The distance that the cartography table will check around itself for pieces.", false, 10f, 300f);
             CartographyTableRequiredPieces = BindServerConfig("CartographyTable", "CartographyTableRequiredPieces", 2000, "The number of pieces that a cartography table needs around it to activate", false, 0, 6000);
+            VegvisirGivesMapIcon = BindServerConfig("Vegvisir", "VegvisirGivesMapIcon", false, "If enabled, interacting with a vegvisir will give its map location.");
             VegvisirTrackerDuration = BindServerConfig("Vegvisir", "VegvisirTrackerDuration", 120, "Duration in seconds of the status effect which tracks a boss location.", false, 10, 600);
             VegvisirTrackerSpeed = BindServerConfig("Vegvisir", "VegvisirTrackerSpeed", 10f, "Speed at which the tracker moves towards its target. To fast or too slow makes this hard for the player to follow.", true, 1, 50);
             VegvisirTrackerPingFrequency = BindServerConfig("Vegvisir", "VegvisirTrackerPingFrequency", 5f, "The frequency at which new pings are emitted tracking the destination", true, 1f, 60f);
+            VegvisirNetworkWaitDuration = BindServerConfig("Vegvisir", "VegvisirNetworkWaitDuration", 30f, "How long to wait for the server to provide the target location.", true, 5f, 120f);
         }
 
         internal static void SetupMainFileWatcher() {
